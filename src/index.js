@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 import TodoItem from "./todo-item";
-
 import "./styles.css";
 
 class App extends Component {
@@ -42,6 +41,7 @@ class App extends Component {
         <form className="add-todo" onSubmit={this.addTodo}>
           <input
             type="text"
+            align="right"
             placeholder="Add ToDo"
             onChange={this.onChange}
             value={this.state.todo}
