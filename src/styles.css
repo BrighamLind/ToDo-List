@@ -23,6 +23,10 @@
   padding-bottom: 15px;
 }
 
+.add-todo input {
+  padding-left: 10px;
+}
+
 .add-todo input,
 button {
   border-radius: 10px;
