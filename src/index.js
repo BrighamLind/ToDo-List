@@ -16,13 +16,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:5000/todos")
+    fetch("https://bpl-bottega-todo-list.herokuapp.com/todos")
       .then(response => response.json())
-        .then(data =>
-          this.setState({
-            todos: data
-          })
-        );
+      .then(data =>
+        this.setState({
+          todos: data
+        })
+      );
   }
 
   onChange = event => {
@@ -34,12 +34,8 @@ class App extends Component {
   renderTodos = () => {
     return this.state.todos.map(item => {
       return (
-        <TodoItem
-          key={item.id}
-          item={item}
-          deleteItem={this.deleteItem}
-        />
-      )
+        <TodoItem key={item.id} item={item} deleteItem={this.deleteItem} />
+      );
     });
   };
 
@@ -47,7 +43,7 @@ class App extends Component {
     event.preventDefault();
     axios({
       method: "post",
-      url: "http://localhost:5000/add-todo",
+      url: "https://bpl-bottega-todo-list.herokuapp.com/add-todo",
       headers: { "content-type": "application/json" },
       data: {
         title: this.state.todo,
@@ -58,23 +54,24 @@ class App extends Component {
         this.setState({
           todos: [...this.state.todos, data.data],
           todo: ""
-        })
+        });
       })
-        .catch(error => console.log(error))
+      .catch(error => console.log(error));
   };
 
   deleteItem = id => {
-    fetch(`http://localhost:5000/todo/${id}`, {
+    fetch(`https://bpl-bottega-todo-list.herokuapp.com/${id}`, {
       method: "DELETE"
     })
-      .then(this.setState({
-        todos: this.state.todos.filter(item => {
-          return item.id !== id
+      .then(
+        this.setState({
+          todos: this.state.todos.filter(item => {
+            return item.id !== id;
+          })
         })
-      })
-    )
+      )
       .catch(error => console.log(error));
-  }
+  };
 
   render() {
     return (
