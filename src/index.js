@@ -60,7 +60,7 @@ class App extends Component {
   };
 
   deleteItem = id => {
-    fetch(`https://bpl-bottega-todo-list.herokuapp.com/${id}`, {
+    fetch(`https://bpl-bottega-todo-list.herokuapp.com/todo/${id}`, {
       method: "DELETE"
     })
       .then(
