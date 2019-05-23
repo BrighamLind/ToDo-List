@@ -10,20 +10,24 @@ export default class TodoItem extends Component {
   }
 
   toggleDone = () => {
-    fetch(`http://localhost:5000/todo/${this.props.item.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: this.props.item.title,
-        done: !this.state.done
-      })
-    })
-      .then(this.setState({
-        done: !this.state.done
-      })
+    fetch(
+      `https://bpl-bottega-todo-list.herokuapp.com/todo/${this.props.item.id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: this.props.item.title,
+          done: !this.state.done
+        })
+      }
     )
+      .then(
+        this.setState({
+          done: !this.state.done
+        })
+      )
       .catch(error => console.log(error));
-  }
+  };
 
   render() {
     return (
@@ -33,8 +37,12 @@ export default class TodoItem extends Component {
           onClick={this.toggleDone}
           defaultChecked={this.state.done}
         />
-        <p className={this.state.done ? "done" : null}>{this.props.item.title}</p>
-        <button onClick={() => this.props.deleteItem(this.props.item.id)}>X</button>
+        <p className={this.state.done ? "done" : null}>
+          {this.props.item.title}
+        </p>
+        <button onClick={() => this.props.deleteItem(this.props.item.id)}>
+          X
+        </button>
       </div>
     );
   }
